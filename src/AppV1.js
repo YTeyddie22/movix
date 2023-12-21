@@ -44,7 +44,6 @@ const tempWatchedData = [
 		userRating: 9,
 	},
 ];
-const movieData = "cb32c488";
 
 const average = (arr) =>
 	arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
