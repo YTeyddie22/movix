@@ -4,7 +4,6 @@ import Search from "./components/Search";
 import ErrorMessage from "./components/ErrorMessage";
 import MovieList from "./components/MovieList";
 import StarRating from "./components/StarRating";
-const movieData = "cb32c488";
 
 const average = (arr) =>
 	arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
