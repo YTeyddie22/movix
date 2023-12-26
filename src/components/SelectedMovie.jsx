@@ -55,6 +55,18 @@ function SelectedMovie({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		},
 		[selectedId]
 	);
+
+	useEffect(
+		function () {
+			if (!title) return;
+			document.title = `Movie | ${title}`;
+
+			return function () {
+				document.title = "Movix";
+			};
+		},
+		[title]
+	);
 	return (
 		<div className='details'>
 			{isLoading ? (
