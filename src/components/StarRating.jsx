@@ -14,9 +14,10 @@ const starContainerStyle = {
 export default function StarRating({
 	maxrating = 10,
 	color = "#FCC419",
-	size = 27,
+	size = 24,
 	messages = [],
 	defaultRating = 0,
+	onSetRating,
 }) {
 	const [rating, setRating] = useState(defaultRating);
 	const [tempRating, setTempRating] = useState(0);
@@ -30,6 +31,7 @@ export default function StarRating({
 
 	function handleRating(rate) {
 		setRating(rate);
+		onSetRating(rate);
 	}
 
 	return (
