@@ -39,6 +39,24 @@ function SelectedMovie({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		onCloseMovie();
 	}
 
+	//Using DOM event listeners
+	useEffect(
+		function () {
+			function callback(e) {
+				if (e.code === "Escape") {
+					onCloseMovie();
+				}
+			}
+
+			document.addEventListener("keydown", callback);
+
+			return function () {
+				document.removeEventListener("keydown", callback);
+			};
+		},
+		[onCloseMovie]
+	);
+
 	useEffect(
 		function () {
 			async function fetchSelectedMovie() {
