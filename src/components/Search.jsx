@@ -1,22 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useEventListener } from "../custom_hooks/useEventListener";
 
 function Search({ query, setQuery }) {
 	const inputRef = useRef(null);
+	useEventListener("Enter", function () {
+		if (document.activeElement === inputRef.current) return;
+		inputRef.current.focus();
+		setQuery("");
+	});
 
-	useEffect(
-		function () {
-			function callback(e) {
-				if (document.activeElement === inputRef.current) return;
-
-				if (e.code === "Enter") {
-					inputRef.current.focus();
-					setQuery("");
-				}
-			}
-			return () => document.addEventListener("keydown", callback);
-		},
-		[setQuery]
-	);
 	return (
 		<input
 			className='search'

@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import Loader from "./Loader";
 import StarRating from "./StarRating";
 import movieData from "../data";
+import { useEventListener } from "../custom_hooks/useEventListener";
 
 function SelectedMovie({ selectedId, onCloseMovie, onAddWatched, watched }) {
 	const [movie, setMovie] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
 	const [userRating, setUserRating] = useState("");
+
 	const isWatched = watched.map((movie) => movie.imdbId).includes(selectedId);
 	const watchedUserRating = watched.find(
 		(movie) => movie.imdbId === selectedId
@@ -39,24 +41,7 @@ function SelectedMovie({ selectedId, onCloseMovie, onAddWatched, watched }) {
 		onCloseMovie();
 	}
 
-	//Using DOM event listeners
-	useEffect(
-		function () {
-			function callback(e) {
-				if (e.code === "Escape") {
-					onCloseMovie();
-				}
-			}
-
-			document.addEventListener("keydown", callback);
-
-			return function () {
-				document.removeEventListener("keydown", callback);
-			};
-		},
-		[onCloseMovie]
-	);
-
+	useEventListener("Escape", onCloseMovie);
 	useEffect(
 		function () {
 			async function fetchSelectedMovie() {
